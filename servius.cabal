@@ -1,5 +1,5 @@
 name:                servius
-version:             1.2.0.0
+version:             1.2.0.1
 synopsis:            Warp web server with template rendering
 description:         Please see README.md
 homepage:            http://github.com/snoyberg/servius#readme
@@ -11,6 +11,7 @@ copyright:           2015 Michael Snoyman
 category:            Web
 build-type:          Simple
 cabal-version:       >=1.10
+extra-source-files:  README.md ChangeLog.md
 
 executable servius
   hs-source-dirs:      app
