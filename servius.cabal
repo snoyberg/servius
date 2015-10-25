@@ -1,5 +1,5 @@
 name:                servius
-version:             0.1.0.0
+version:             1.2.0.0
 synopsis:            Warp web server with template rendering
 description:         Please see README.md
 homepage:            http://github.com/snoyberg/servius#readme

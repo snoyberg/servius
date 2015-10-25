@@ -19,6 +19,7 @@ import           Text.Hamlet                        (defaultHamletSettings)
 import           Text.Hamlet.RT                     (parseHamletRT,
                                                      renderHamletRT)
 import           Text.Lucius                        (luciusRT)
+import           Text.Markdown                      (def, msXssProtect, msAddHeadingId, markdown)
 import           WaiAppStatic.CmdLine               (docroot, runCommandLine)
 
 main :: IO ()
@@ -30,6 +31,8 @@ shake docroot app req respond
     | null p = app req respond
     | ".hamlet" `T.isSuffixOf` l = hamlet pr >>= respond
     | ".lucius" `T.isSuffixOf` l = lucius pr >>= respond
+    | ".markdown" `T.isSuffixOf` l = markdown' pr >>= respond
+    | ".md" `T.isSuffixOf` l = markdown' pr >>= respond
     | otherwise = app req respond
   where
     p = pathInfo req
@@ -60,3 +63,15 @@ lucius fp = do
     str <- readFileUtf8 fp
     let text = either error id $ luciusRT (TL.pack str) []
     return $ responseBuilder status200 [("Content-Type", "text/css; charset=utf-8")] $ fromLazyText text
+
+markdown' :: Text -> IO Response
+markdown' fp = do
+    bs <- S8.readFile $ T.unpack fp
+    let t = decodeUtf8With lenientDecode bs
+        html = markdown settings $ TL.fromStrict t
+    return $ responseBuilder status200 [("Content-Type", "text/html; charset=utf-8")] $ renderHtmlBuilder html
+  where
+    settings = def
+        { msXssProtect = False
+        , msAddHeadingId = True
+        }
