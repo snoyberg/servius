@@ -16,6 +16,8 @@ flags: {}
 # Extra package databases containing global packages
 extra-package-dbs: []
 
+pvp-bounds: both
+
 # Control whether we use the GHC we find on the path
 # system-ghc: true
 
