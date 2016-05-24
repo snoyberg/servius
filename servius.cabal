@@ -17,7 +17,7 @@ executable servius
   hs-source-dirs:      app
   main-is:             servius.hs
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
-  build-depends:       base
+  build-depends:       base >= 4 && < 5
                      , blaze-builder
                      , blaze-html
                      , bytestring
