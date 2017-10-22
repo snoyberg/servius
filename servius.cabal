@@ -1,5 +1,5 @@
 name:                servius
-version:             1.2.0.2
+version:             1.2.0.3
 synopsis:            Warp web server with template rendering
 description:         Please see README.md
 homepage:            http://github.com/snoyberg/servius#readme
@@ -21,7 +21,7 @@ executable servius
                      , blaze-builder
                      , blaze-html
                      , bytestring
-                     , http-types < 0.10
+                     , http-types
                      , markdown
                      , shakespeare
                      , text
