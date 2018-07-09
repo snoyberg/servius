@@ -18,8 +18,9 @@ environment:
   #- ARGS: "--resolver lts-3"
   #- ARGS: "--resolver lts-6"
   #- ARGS: "--resolver lts-7"
-  #- ARGS: "--resolver lts-9"
-  #- ARGS: "--resolver lts-11"
+  - ARGS: "--resolver lts-9"
+  - ARGS: "--resolver lts-11"
+  - ARGS: "--resolver lts-12"
   #- ARGS: "--resolver nightly"
 
 test_script:
