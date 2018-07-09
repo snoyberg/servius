@@ -1,0 +1,36 @@
+name:        servius
+version:     1.2.0.3
+synopsis:    Warp web server with template rendering
+description: Please see README.md at https://www.stackage.org/package/servius
+category:    Web
+author:      Michael Snoyman
+maintainer:  michael@snoyman.com
+copyright:   2015-2018 Michael Snoyman
+license:     MIT
+github:      snoyberg/servius
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+ghc-options:
+- -threaded
+- -rtsopts
+- -with-rtsopts=-N
+
+dependencies:
+- base >=4 && <5
+- blaze-builder
+- blaze-html
+- bytestring
+- http-types
+- markdown
+- shakespeare
+- text
+- wai
+- wai-app-static
+
+executables:
+  servius:
+    main: servius.hs
+    source-dirs: app
