@@ -19,7 +19,7 @@ ghc-options:
 - -with-rtsopts=-N
 
 dependencies:
-- base >=4 && <5
+- base >= 4.9.1 && <5 # GHC 8.0.2
 - blaze-builder
 - blaze-html
 - bytestring
