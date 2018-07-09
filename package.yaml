@@ -23,8 +23,8 @@ dependencies:
 - blaze-builder
 - blaze-html
 - bytestring
+- cmark-gfm
 - http-types
-- markdown
 - shakespeare
 - text
 - wai

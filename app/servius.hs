@@ -5,10 +5,11 @@
 module Main (main) where
 
 import           Blaze.ByteString.Builder.Char.Utf8 (fromLazyText)
+import           CMarkGFM                           (extAutolink, extTable, extStrikethrough, optSmart, commonmarkToHtml)
 import qualified Data.ByteString.Char8              as S8
 import           Data.Text                          (Text)
 import qualified Data.Text                          as T
-import           Data.Text.Encoding                 (decodeUtf8With)
+import           Data.Text.Encoding                 (encodeUtf8Builder, decodeUtf8With)
 import           Data.Text.Encoding.Error           (lenientDecode)
 import qualified Data.Text.Lazy                     as TL
 import           Network.HTTP.Types                 (status200)
@@ -19,7 +20,6 @@ import           Text.Hamlet                        (defaultHamletSettings)
 import           Text.Hamlet.RT                     (parseHamletRT,
                                                      renderHamletRT)
 import           Text.Lucius                        (luciusRT)
-import           Text.Markdown                      (def, msXssProtect, msAddHeadingId, markdown)
 import           WaiAppStatic.CmdLine               (docroot, runCommandLine)
 
 main :: IO ()
@@ -68,10 +68,8 @@ markdown' :: Text -> IO Response
 markdown' fp = do
     bs <- S8.readFile $ T.unpack fp
     let t = decodeUtf8With lenientDecode bs
-        html = markdown settings $ TL.fromStrict t
-    return $ responseBuilder status200 [("Content-Type", "text/html; charset=utf-8")] $ renderHtmlBuilder html
-  where
-    settings = def
-        { msXssProtect = False
-        , msAddHeadingId = True
-        }
+        html = commonmarkToHtml
+          [optSmart]
+          [extStrikethrough, extTable, extAutolink]
+          t
+    return $ responseBuilder status200 [("Content-Type", "text/html; charset=utf-8")] $ encodeUtf8Builder html
