@@ -10,7 +10,7 @@ import           CMarkGFM                           (extAutolink, extTable, extS
 import qualified Data.ByteString.Char8              as S8
 import           Data.Text                          (Text)
 import qualified Data.Text                          as T
-import           Data.Text.Encoding                 (encodeUtf8Builder, decodeUtf8With)
+import           Data.Text.Encoding                 (decodeUtf8With)
 import           Data.Text.Encoding.Error           (lenientDecode)
 import qualified Data.Text.Lazy                     as TL
 import           Network.HTTP.Types                 (status200)
