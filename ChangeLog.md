@@ -1,5 +1,10 @@
 # ChangeLog for servius
 
+## 1.2.2.0
+
+* Viewport for Markdown
+* Rudimentary title parsing for Markdown
+
 ## 1.2.1.0
 
 * Move to cmark-gfm

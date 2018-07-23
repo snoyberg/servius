@@ -2,6 +2,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
+{-# LANGUAGE QuasiQuotes        #-}
 module Main (main) where
 
 import           Blaze.ByteString.Builder.Char.Utf8 (fromLazyText)
@@ -15,8 +16,9 @@ import qualified Data.Text.Lazy                     as TL
 import           Network.HTTP.Types                 (status200)
 import           Network.Wai                        (Middleware, Response,
                                                      pathInfo, responseBuilder)
+import           Text.Blaze.Html                    (preEscapedToHtml)
 import           Text.Blaze.Html.Renderer.Utf8      (renderHtmlBuilder)
-import           Text.Hamlet                        (defaultHamletSettings)
+import           Text.Hamlet                        (defaultHamletSettings, shamlet)
 import           Text.Hamlet.RT                     (parseHamletRT,
                                                      renderHamletRT)
 import           Text.Lucius                        (luciusRT)
@@ -72,4 +74,15 @@ markdown' fp = do
           [optSmart]
           [extStrikethrough, extTable, extAutolink]
           t
-    return $ responseBuilder status200 [("Content-Type", "text/html; charset=utf-8")] $ encodeUtf8Builder html
+        title = T.strip $ T.dropWhile (== '#') $ T.concat $ take 1 $ dropWhile T.null $ T.lines t
+    return $ responseBuilder status200 [("Content-Type", "text/html; charset=utf-8")] $ renderHtmlBuilder
+      [shamlet|
+          $doctype 5
+          <html>
+            <head>
+              <meta charset=utf-8>
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>#{title}
+            <body>
+              <article>#{preEscapedToHtml html}
+      |]
