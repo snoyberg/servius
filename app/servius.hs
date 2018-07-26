@@ -81,8 +81,23 @@ markdown' fp = do
           <html>
             <head>
               <meta charset=utf-8>
+              <meta http-equiv="X-UA-Compatible" content="IE=edge">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
               <title>#{title}
+
+              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+              <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/zenburn.min.css">
+
+
             <body>
-              <article>#{preEscapedToHtml html}
+              <div .container>
+                <div .row>
+                  <div .col-sm-2>
+                  <div .col-sm-8>
+                    <article>#{preEscapedToHtml html}
+
+              <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js">
+              <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js">
+              <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js">
+              <script>hljs.initHighlightingOnLoad();
       |]

@@ -4,6 +4,7 @@
 
 * Viewport for Markdown
 * Rudimentary title parsing for Markdown
+* Use Bootstrap and Highlightjs for Markdown
 
 ## 1.2.1.0
 
