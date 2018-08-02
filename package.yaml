@@ -1,5 +1,5 @@
 name:        servius
-version:     1.2.2.0
+version:     1.2.3.0
 synopsis:    Warp web server with template rendering
 description: Please see README.md at https://www.stackage.org/package/servius
 category:    Web
